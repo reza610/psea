@@ -384,7 +384,7 @@ def plot_pcea(cumscore, trend, ranks, comorbidity_binary, sim_pcea, pcea, n_bins
 
 
 def run_psea(infilename, outfilename):
-    gene_cormorbid_data = load_ranks(infilename)
+    gene_cormorbid_data = pd.read_csv(infilename)
     sample = gene_cormorbid_data["sample"].to_list()
     value = gene_cormorbid_data["value"].to_list()
     binary_attribute = gene_cormorbid_data["binary_attribute"].to_list()
