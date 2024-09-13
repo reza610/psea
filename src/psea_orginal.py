@@ -402,4 +402,7 @@ if __name__ == "__main__":
     parser.add_argument('-i', '--inputfile') 
     parser.add_argument('-o', '--outputfile') 
     args = parser.parse_args()
-    
+    inputfile = args.inputfile
+    outputfile = args.outputfile
+    run_psea(infilename, outfilename)
+

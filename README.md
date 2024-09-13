@@ -1,2 +1,2 @@
-# psea
+# PSEA
 Participant set enrichment analysis
