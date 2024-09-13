@@ -389,11 +389,14 @@ def run_psea(infilename, outfilename):
     value = gene_cormorbid_data["value"].to_list()
     binary_attribute = gene_cormorbid_data["binary_attribute"].to_list()
     df = gene_cormorbid_data[["sample", "value", "binary_attribute"]]
+    df = df.sort_value("value")
+    thiscomorbidity_binary = gene_cormorbid_data["binary_attribute"].to_list()
     actualES_norm, normalized_pc_score_norm, thistrend_norm, thiscumscore_norm = pcea_score_norm(thiscomorbidity_binary)
     simES_norm = permute_pcea_norm(normalized_pc_score_norm, permutations=1000)
     onegeneNES, onegenep = calculateNESpval(actualES_norm, simES_norm)
     line = [genename, comorbidname, onegeneNES, onegenep]
-    wf = open(infilename, "w")
+    df.to_csv(outfilename+".df")
+    wf = open(outfilename, "w")
     wf.write("\t".join(map(str,line)))
 
 
@@ -404,5 +407,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     inputfile = args.inputfile
     outputfile = args.outputfile
-    run_psea(infilename, outfilename)
+    run_psea(inputfile, outputfile)
 
