@@ -19,7 +19,7 @@ if __name__ == "__main__":
     parser.add_argument('-ban', '--bianary_attribute_name')
     parser.add_argument('-vf', '--values_file')
     parser.add_argument('-vn', '--value_name')
-    parser.add_argument('-o', '--outputfile')
+    parser.add_argument('-of', '--outputfile')
     parser.add_argument('-sn', '--sample_name')
     args = parser.parse_args()
     bianary_attribute_file = args.bianary_attribute_file
