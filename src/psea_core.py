@@ -228,10 +228,6 @@ def permute_pcea(ranks, permutations=1000, seed=42):
     #set a seed
     np.random.seed(seed=seed)
     
-    print("----------------------------")
-    print("Number of permutations: "+str(permutations))
-    print("----------------------------")
-    
     es_permute = list()
     for i in range(permutations):
 
@@ -267,9 +263,6 @@ def permute_pcea_norm(ranks, permutations=1000, seed=42):
     np.random.seed(seed=seed)    
     
     
-    print("----------------------------")
-    print("Number of permutations: "+str(permutations))
-    print("----------------------------")
     
     es_permute = list()
     for i in range(permutations):
@@ -361,13 +354,13 @@ def write_psea(infilename, outputfile):
 
 def is_unique(s):
     a = s.to_numpy() # s.values (pandas<0.24)
-    if a[0]==1:
-        print ("found it")
     return (a[0] == a).all()
 
 def psea_heart(gene_cormorbid_data, outfilename):
     sample = gene_cormorbid_data["sample"].to_list()
-    if is_unique(gene_cormorbid_data["value"])==True | is_unique(gene_cormorbid_data["binary_attribute"])==True:
+    if is_unique(gene_cormorbid_data["value"])==True:
+        return "ba or value are all identical", "fail"
+    elif is_unique(gene_cormorbid_data["binary_attribute"])==True:
         return "ba or value are all identical", "fail"
     else:
     	value = gene_cormorbid_data["value"].to_list()

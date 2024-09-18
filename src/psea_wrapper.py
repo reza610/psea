@@ -15,10 +15,12 @@ import time
 
 def several_rank_and_cores(dfs_and_args):
     df,sample_name, bianary_attribute_file, values_file = dfs_and_args
-    print(df.columns)
     collection_onegeneNES = []
     collection_onegenep = []
+    LOG_EVERY_N=1000
     for index, row in df.iterrows():
+        if (index % LOG_EVERY_N) == 0:
+             print (index)
         shouldIrun=row["runpsea"]
         if shouldIrun=="included":
             outputfile=row["psea_score_file"]
@@ -27,7 +29,6 @@ def several_rank_and_cores(dfs_and_args):
             gene_cormorbid_data = make_rankable_file.run_merge(outputfile,sample_name,values_file, bianary_attribute_file, value_name, bianary_attribute_name, low_memory=False)
             #now I need to adapt make_rankable_file.run_merge run off a dataframe
             onegeneNES, onegenep = psea_core.psea_heart(gene_cormorbid_data, outputfile)
-            print(bianary_attribute_name, value_name, onegeneNES, onegenep)
             collection_onegeneNES.append(onegeneNES)
             collection_onegenep.append(onegenep)
         else:
