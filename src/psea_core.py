@@ -17,42 +17,6 @@ import pandas as pd
 #set seed for testing
 np.random.seed(seed=42)
 
-def load_ranks(comorbidity_file):
-    '''Load in a table with comorbidity tables and return list if list with
-    column information from original tables
-    
-    Parameters
-    ----------
-    comorbidity_file : str
-        path with patient and comorbidity data
-      
-    Returns
-    -------
-    comorbidities_list : list of lists
-        lists with all comorbidities data
-    
-    '''
-
-    ranks = list()
-    patient = list()
-    gene_expression = list()
-    comorbidity_binary = list()
-
-    with open(comorbidity_file) as F:
-        for line in F:
-            if "Patient" in line:                                                                                                                                                                            
-                continue
-            line = line.strip('\n').split(',')
-            ranks.append(int(line[0].replace('"', '')))
-            patient.append(line[1].replace('"', ''))
-            gene_expression.append(float(line[2]))
-            comorbidity_binary.append(int(line[3]))
-            
-    comorbidities_list = [ranks, patient, gene_expression, comorbidity_binary]
-            
-    return comorbidities_list
-
-
 def pcea_score(pc_score, verbose=False):
     '''Calculate the GSEA like enrichment score using the comorbidity 
     occurance in the rank as our set
@@ -382,23 +346,39 @@ def plot_pcea(cumscore, trend, ranks, comorbidity_binary, sim_pcea, pcea, n_bins
     fig.tight_layout()
     plt.show()
 
-
-def run_psea(infilename, outfilename):
+def load_file(infilename):
     gene_cormorbid_data = pd.read_csv(infilename)
-    sample = gene_cormorbid_data["sample"].to_list()
-    value = gene_cormorbid_data["value"].to_list()
-    binary_attribute = gene_cormorbid_data["binary_attribute"].to_list()
-    df = gene_cormorbid_data[["sample", "value", "binary_attribute"]]
-    df = df.sort_values("value")
-    thiscomorbidity_binary = gene_cormorbid_data["binary_attribute"].to_list()
-    actualES_norm, normalized_pc_score_norm, thistrend_norm, thiscumscore_norm = pcea_score_norm(thiscomorbidity_binary)
-    simES_norm = permute_pcea_norm(normalized_pc_score_norm, permutations=1000)
-    onegeneNES, onegenep = calculateNESpval(actualES_norm, simES_norm)
-    line = [infilename, onegeneNES, onegenep]
-    df.to_csv(outfilename+".df")
-    wf = open(outfilename, "w")
-    wf.write("\t".join(map(str,line))+"\n")
+    return gene_cormorbid_data
 
+
+def write_psea(infilename, outputfile):
+    gene_cormorbid_data = load_file(infilename)
+    onegeneNES, onegenep = psea_heart(gene_cormorbid_data, outputfile)
+    line = [infilename, onegeneNES, onegenep]
+    wf = open(outputfile, "w")
+    wf.write("\t".join(map(str,line))+"\n")
+    wf.close()
+
+def is_unique(s):
+    a = s.to_numpy() # s.values (pandas<0.24)
+    if a[0]==1:
+        print ("found it")
+    return (a[0] == a).all()
+
+def psea_heart(gene_cormorbid_data, outfilename):
+    sample = gene_cormorbid_data["sample"].to_list()
+    if is_unique(gene_cormorbid_data["value"])==True | is_unique(gene_cormorbid_data["binary_attribute"])==True:
+        return "ba or value are all identical", "fail"
+    else:
+    	value = gene_cormorbid_data["value"].to_list()
+    	binary_attribute = gene_cormorbid_data["binary_attribute"].to_list()
+    	df = gene_cormorbid_data[["sample", "value", "binary_attribute"]]
+    	df = df.sort_values("value")
+    	thiscomorbidity_binary = df["binary_attribute"].to_list()
+    	actualES_norm, normalized_pc_score_norm, thistrend_norm, thiscumscore_norm = pcea_score_norm(thiscomorbidity_binary)
+    	simES_norm = permute_pcea_norm(normalized_pc_score_norm, permutations=1000)
+    	onegeneNES, onegenep = calculateNESpval(actualES_norm, simES_norm)
+    	return onegeneNES, onegenep
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run psea on a single set of values and binary attributes')
@@ -407,5 +387,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     inputfile = args.inputfile
     outputfile = args.outputfile
-    run_psea(inputfile, outputfile)
-
+    write_psea(inputfile, outputfile)

@@ -1,7 +1,7 @@
 import pandas as pd
 import argparse
 
-def run_merge(outputfile,sample_name,values_file, bianary_attribute_file, value_name, bianary_attribute_name):
+def run_merge(outputfile,sample_name,values_file, bianary_attribute_file, value_name, bianary_attribute_name, low_memory=True):
     bianary_attribute_df = pd.read_csv(bianary_attribute_file)
     values_df = pd.read_csv(values_file)
     bianary_attribute_df = bianary_attribute_df[[sample_name, bianary_attribute_name]]
@@ -9,8 +9,10 @@ def run_merge(outputfile,sample_name,values_file, bianary_attribute_file, value_
     df = bianary_attribute_df.merge(values_df, how='inner', on=sample_name)
     df=df.rename(columns={sample_name:"sample", value_name:"value", bianary_attribute_name:'binary_attribute'})
 #,rank_gene,sample,value,binary_attribute
-    df.to_csv(outputfile)
-
+    if low_memory==True:
+        df.to_csv(outputfile)
+    else:
+        return df
 
 
 if __name__ == "__main__":
