@@ -2,7 +2,6 @@ argparse
 matplotlib
 numpy
 scipy
-random
 pandas
 time
 itertools
