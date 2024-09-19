@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import psea_organization
 import make_rankable_file
+import psea_apval
 import psea_core
 from multiprocessing import Pool
 import time
@@ -86,7 +87,7 @@ if __name__ == '__main__':
     parser.add_argument('-vf', '--values_file')
     parser.add_argument('-sn', '--sample_name')
     parser.add_argument('-od', '--outdir')
-    parser.add_argument('-p', '--processes', default=4)
+    parser.add_argument('-p', '--processes', default=4,type=int)
     parser.add_argument('-ivf', '--include_values_file', default=False)
     parser.add_argument('-ibaf', '--include_bianary_attribute_file', default=False)
     parser.add_argument('-evf', '--exclude_values_file', default=False)
@@ -108,14 +109,14 @@ if __name__ == '__main__':
     with Pool(processes=n_processes) as p:
         new_df_list = p.map(several_rank_and_cores, dfs_and_args)    
     timestr = time.strftime("%Y%m%d-%H%M%S")
-    outfilename=outdir+"psea_scores_"+timestr+".csv"
-    outfilename2=outdir+"psea_scores_"+timestr+".csv.info"
+    outfilename=outdir+"psea_scores_"+timestr
     print(outfilename)
     finalresult = pd.concat(new_df_list)
-    finalresult.to_csv(outfilename)
-    wf = open(outfilename2, "w")
+    finalresult.to_csv(outfilename+".csv")
+    dataframe_outfile =  outfilename+"adjpval.csv"
+    finalresult = psea_apval.add_adj_Bonferroni(finalresult)
+    finalresult.to_csv(dataframe_outfile) 
+    wf = open(outfilename+".info", "w")
     line = "this will be where I put all the arguments used when running this"
-    wf.write(line) 
+    wf.write(line)
     wf.close()
-    
-

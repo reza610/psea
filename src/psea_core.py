@@ -359,9 +359,9 @@ def is_unique(s):
 def psea_heart(gene_cormorbid_data, outfilename):
     sample = gene_cormorbid_data["sample"].to_list()
     if is_unique(gene_cormorbid_data["value"])==True:
-        return "ba or value are all identical", "fail"
+        return "ba_or_value_are_all_identical", "excluded_by_psea"
     elif is_unique(gene_cormorbid_data["binary_attribute"])==True:
-        return "ba or value are all identical", "fail"
+        return "ba_or_value_are_all_identical", "excluded_by_psea"
     else:
     	value = gene_cormorbid_data["value"].to_list()
     	binary_attribute = gene_cormorbid_data["binary_attribute"].to_list()
