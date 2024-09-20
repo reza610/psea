@@ -93,11 +93,12 @@ if __name__ == '__main__':
     parser.add_argument('-evf', '--exclude_values_file', default=False)
     parser.add_argument('-ebaf', '--exclude_bianary_attribute_file', default=False)
     args = parser.parse_args()
+    timestr = time.strftime("%Y%m%d-%H%M%S")
     bianary_attribute_file = args.bianary_attribute_file
     values_file = args.values_file
     outdir = args.outdir
     sample_name = args.sample_name
-    master_org_filename = psea_organization.run_org(outdir,sample_name,values_file, bianary_attribute_file)
+    master_org_filename = psea_organization.run_org(outdir,sample_name,values_file, bianary_attribute_file,timestr)
     master_org_df = pd.read_csv(master_org_filename, index_col=0)
     master_org_df["runpsea"] = "included"
     print (master_org_df)
@@ -108,12 +109,11 @@ if __name__ == '__main__':
     dfs_and_args = [(df, sample_name, bianary_attribute_file, values_file) for df in df_list] 
     with Pool(processes=n_processes) as p:
         new_df_list = p.map(several_rank_and_cores, dfs_and_args)    
-    timestr = time.strftime("%Y%m%d-%H%M%S")
     outfilename=outdir+"psea_scores_"+timestr
     print(outfilename)
     finalresult = pd.concat(new_df_list)
     finalresult.to_csv(outfilename+".csv")
-    dataframe_outfile =  outfilename+"adjpval.csv"
+    dataframe_outfile =  outfilename+".adjpval.csv"
     finalresult = psea_apval.add_adj_Bonferroni(finalresult)
     finalresult.to_csv(dataframe_outfile) 
     wf = open(outfilename+".info", "w")

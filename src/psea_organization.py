@@ -4,8 +4,7 @@ import time
 import itertools
 
 
-def run_org(outdir,sample_name,values_file, bianary_attribute_file):
-    timestr = time.strftime("%Y%m%d-%H%M%S")
+def run_org(outdir,sample_name,values_file, bianary_attribute_file,timestr):
     outfilename=outdir+"organization_"+timestr+".df"
     bianary_attribute_df = pd.read_csv(bianary_attribute_file,index_col=0)
     bianary_attribute_df = bianary_attribute_df.drop(columns=[sample_name])
@@ -30,9 +29,10 @@ if __name__ == "__main__":
     parser.add_argument('-sn', '--sample_name')
     parser.add_argument('-od', '--outdir')
     args = parser.parse_args()
+    timestr = time.strftime("%Y%m%d-%H%M%S")
     bianary_attribute_file = args.bianary_attribute_file
     values_file = args.values_file
     outdir = args.outdir
     sample_name = args.sample_name
-    run_org(outdir,sample_name,values_file, bianary_attribute_file)
+    run_org(outdir,sample_name,values_file, bianary_attribute_file,timestr)
 
