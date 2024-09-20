@@ -8,7 +8,7 @@ PSEA is a tool that takes two csv files as input. Both csvs have the same sample
 Both input csv files must have a comman samplename column. 
 In our case that common samplename is "Patient".
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Value csv")
+![alt text](https://github.com/Dowell-Lab/psea/blob/main/src/images/binary_attributes_df.png "Value csv")
 
 One of the csv files needs to have in it bianary attributes. In our case the bianrary attributes are the disease/disorder of the patients called comorbdititys. 
 
