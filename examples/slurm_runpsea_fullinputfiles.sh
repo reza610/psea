@@ -10,7 +10,8 @@
 #SBATCH --error=/scratch/Users/allenma/e_and_o/slurm_test.%j.err # Standard error log
 
 #turn on the virtual machine you are using if you are using one
-source /Users/allenma/psea_venv/bin/activate
+path_to_venv=$HOME
+source $path_to_venv/psea_venv/bin/activate
 
 #set the paths to the files to load in
 path_to_psea=$HOME
