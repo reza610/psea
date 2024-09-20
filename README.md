@@ -1,6 +1,7 @@
 # PSEA
 Participant set enrichment analysis
 
+## Summary
 PSEA is a tool that takes two csv files as input and output a dataframe that shows potiential linkages for the columns in the two csv files. 
 
 Both input csv files must have a comman samplename column. 
