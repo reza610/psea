@@ -6,6 +6,7 @@ The goal if PSEA is to link binary attributes to values attributes via samples. 
 
 In our example, we analyze gene expression data from 254 individuals with Down syndrome, along with their associated medical conditions. Our objective is to identify genes that, when highly expressed, may influence the likelihood of specific medical conditions.  However, it's important to note that, similar to correlation analysis, a connection between a gene and a condition does not imply causation.
 
+![alt text](https://github.com/Dowell-Lab/psea/blob/main/src/images/results_example.png "results example")
 
 
 
