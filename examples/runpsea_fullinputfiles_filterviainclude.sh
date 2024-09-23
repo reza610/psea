@@ -3,8 +3,8 @@ sample_name=Patient
 values_file=${indir}value_expression.csv
 bianary_attribute_file=${indir}comorbid_file.csv
 outdirname=$HOME/outpsea/
-include_values_file=${indir}include_values.csv
-include_binary_attribute_file=${indir}include_binary_attribute.csv
+include_values_file=${indir}include_values_short.csv
+include_binary_attribute_file=${indir}include_binary_attribute_short.csv
 
 mkdir $outdirname
 
