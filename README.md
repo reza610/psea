@@ -4,7 +4,7 @@ Participant set enrichment analysis
 ## Summary
 The goal if PSEA is to link binary attributes to values attributes via samples. In this way we may be able to find value  attributes that cause the binary attributes.
 
-In our example, we analyze gene expression data from 254 individuals with Down syndrome, along with their associated medical conditions. Our objective is to identify genes that, when highly expressed, may influence the likelihood of specific medical conditions.  However, it's important to note that, similar to correlation analysis, a connection between a gene and a condition does not imply causation.
+In our example, we analyze gene expression data from 254 individuals with Down syndrome, along with their associated medical conditions. Our objective is to identify genes that, when highly expressed, may influence the likelihood of specific medical conditions.  However, it's important to note that, similar to correlation analysis, a connection between a gene and a condition does not imply causation. NES is the Normalized Erichiment score. A negative NES indcates high levels of that value are seen when the binary attribute is true. A postive NES indcates low levels of that value are seen when the binary attribute is true. 
 
 ![alt text](https://github.com/Dowell-Lab/psea/blob/main/src/images/results_example_NES.png "results example")
 
