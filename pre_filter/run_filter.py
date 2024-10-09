@@ -6,6 +6,7 @@ def main():
     parser = argparse.ArgumentParser(description="Run filtering script with user-defined thresholds.")
 
     # Add arguments
+    parser.add_argument('-od', '--outdir')
     parser.add_argument('-pct', '--patient_comorbid_threshold', type=int, default=1, 
                         help='Threshold for minimum number of comorbidities a patient should have to be included.')
     parser.add_argument('-mincp', '--min_comorbids_percent', type=int, default=0.1, 
