@@ -19,7 +19,7 @@ sample_name=Patient
 values_file=${indir}value_expression.csv
 binary_attribute_file=${indir}comorbid_file.csv
 include_values_file=${outdir}include_values_long.csv
-include_binary_attribute_file=${outdirname}include_binary_attribute_long.csv
+include_binary_attribute_file=${outdir}include_binary_attribute_long.csv
 
 mkdir -p $outdir
 

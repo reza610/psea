@@ -105,7 +105,7 @@ def run_filtering(patient_comorbid_threshold,
     # save output file based on include_values_file argument input
     #include_values_file = "../testdata/include_values_long.csv"
     outdir = include_values_file
-    meansdf_include[["valuename"]].to_csv(oudir, header=False, index=False)
+    meansdf_include[["valuename"]].to_csv(outdir, header=False, index=False)
     
     ####Some ideas going forward:
     # Need to add more error handling
