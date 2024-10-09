@@ -11,17 +11,17 @@
 
 #turn on the virtual machine you are using if you are using one
 path_to_venv=$HOME
-source $path_to_venv/jhub_venv/activate 
+source $path_to_venv/jhub_venv/bin/activate 
 
 indir=../testdata/
-outdir=$HOME/ChrisO/PSEA_OUTPUT
+outdir=$HOME/ChrisO/PSEA_OUTPUT/
 sample_name=Patient
 values_file=${indir}value_expression.csv
 bianary_attribute_file=${indir}comorbid_file.csv
-include_values_file=${outdir}/include_values_long.csv
-include_binary_attribute_file=${outdirname}/include_binary_attribute_long.csv
+include_values_file=${outdir}include_values_long.csv
+include_binary_attribute_file=${outdirname}include_binary_attribute_long.csv
 
-mkdir -p $outdirname
+mkdir -p $outdir
 
 echo $values_file
 echo $bianary_attribute_file
