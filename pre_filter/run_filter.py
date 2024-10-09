@@ -24,7 +24,7 @@ def main():
                         help='The title of the column that includes the patient IDs/names.')
     parser.add_argument('-ivf', '--include_values_file', type=str,
                         help='Name/location of file to contain filtered list of gene names.')
-    parser.add_argument('-ibaf', '--include_bianary_attribute_file', type=str, 
+    parser.add_argument('-ibaf', '--include_binary_attribute_file', type=str, 
                         help='Name/location of file to contain filtered list of cormorbidities.')
 
     
