@@ -7,7 +7,7 @@ def run_filtering(patient_comorbid_threshold,
                   individual_expression_threshold, 
                   min_mean_expression, 
                   values_file, 
-                  bianary_attribute_file, 
+                  binary_attribute_file, 
                   sample_name, 
                   include_values_file, 
                   include_binary_attribute_file):
@@ -31,7 +31,7 @@ def run_filtering(patient_comorbid_threshold,
     
     - values_file = the file with patient IDs, gene names, and gene expression values.
     
-    - bianary_attribute_file = the file with patient IDs and comorbidity designations.
+    - binary_attribute_file = the file with patient IDs and comorbidity designations.
     
     - sample_name = the title of the column that has the patient IDs or sample names in the comorbidity and gene expression files.
     
@@ -45,8 +45,8 @@ def run_filtering(patient_comorbid_threshold,
     
     # get working dir and read in the CSV file
     #sample_name = 'Patient'
-    # bianary_attribute_file = '../testdata/comorbid_file.csv'
-    file_path = bianary_attribute_file
+    # binary_attribute_file = '../testdata/comorbid_file.csv'
+    file_path = binary_attribute_file
     df = pd.read_csv(file_path, index_col=0)
     
     # number samples
@@ -71,7 +71,7 @@ def run_filtering(patient_comorbid_threshold,
     n_comorbid = n_comorbid[n_comorbid["percent"]<max_comorbids_percent]
     n_comorbid = n_comorbid[n_comorbid["percent"]>min_comorbids_percent]
     
-    # name the output file and save it based on include_bianary_attribute_file argument input
+    # name the output file and save it based on include_binary_attribute_file argument input
     #include_binary_attribute_file = '../testdata/include_binary_attribute_long.csv'
     outdir = include_binary_attribute_file
     n_comorbid[["binary_attribute"]].to_csv(outdir, header=False, index=False)

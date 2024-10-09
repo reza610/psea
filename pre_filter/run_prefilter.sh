@@ -17,23 +17,23 @@ indir=../testdata/
 outdir=$HOME/ChrisO/PSEA_OUTPUT/
 sample_name=Patient
 values_file=${indir}value_expression.csv
-bianary_attribute_file=${indir}comorbid_file.csv
+binary_attribute_file=${indir}comorbid_file.csv
 include_values_file=${outdir}include_values_long.csv
 include_binary_attribute_file=${outdirname}include_binary_attribute_long.csv
 
 mkdir -p $outdir
 
 echo $values_file
-echo $bianary_attribute_file
+echo $binary_attribute_file
 echo $outdirname
 echo "filtering..."
 
 python3 run_filter.py \
     -sn $sample_name \
     -vf $values_file \
-    -baf $bianary_attribute_file \
+    -baf $binary_attribute_file \
     --include_values_file $include_values_file \
-    --include_bianary_attribute_file $include_binary_attribute_file \
+    --include_binary_attribute_file $include_binary_attribute_file \
     --patient_comorbid_threshold 1 \
     --min_comorbids_percent 0.1 \
     --max_comorbids_percent 0.9 \

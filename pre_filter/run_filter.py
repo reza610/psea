@@ -18,7 +18,7 @@ def main():
                         help='Threshold for minimum overall gene expression level of an given individual for an individual to be retained.')
     parser.add_argument('-vf', '--values_file', type=str,
                         help='File with patient IDs, gene names, and expression values.')
-    parser.add_argument('-baf', '--bianary_attribute_file', type=str,
+    parser.add_argument('-baf', '--binary_attribute_file', type=str,
                         help='File with patient IDs and comorbidity designations.')
     parser.add_argument('-sn', '--sample_name', type=str, default='Patient', 
                         help='The title of the column that includes the patient IDs/names.')
@@ -35,7 +35,7 @@ def main():
     # Call the filtering function with the provided arguments
     run_filtering(args.patient_comorbid_threshold, args.min_comorbids_percent, args.max_comorbids_percent, 
                   args.min_mean_expression, args.individual_expression_threshold,
-                  args.values_file, args.bianary_attribute_file, args.sample_name, 
+                  args.values_file, args.binary_attribute_file, args.sample_name, 
                   args.include_values_file, args.include_binary_attribute_file)
 
 if __name__ == "__main__":
