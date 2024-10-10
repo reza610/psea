@@ -70,11 +70,13 @@ def run_filtering(patient_comorbid_threshold,
     #min_comorbids_percent = 0.1
     n_comorbid = n_comorbid[n_comorbid["percent"]<max_comorbids_percent]
     n_comorbid = n_comorbid[n_comorbid["percent"]>min_comorbids_percent]
+    print(n_comorbid)
     
     # name the output file and save it based on include_binary_attribute_file argument input
     #include_binary_attribute_file = '../testdata/include_binary_attribute_long.csv'
     outdir = include_binary_attribute_file
     n_comorbid[["binary_attribute"]].to_csv(outdir, header=False, index=False)
+    print("COMORBID FILE SAVED")
     
     ##gene expression csv filtering##
     
@@ -82,7 +84,6 @@ def run_filtering(patient_comorbid_threshold,
     # values_file = '../testdata/value_expression.csv'
     file_path = values_file
     df = pd.read_csv(file_path, index_col=0)
-    print(file_path)
     
     # drop samples column
     expression_df_nosamples = df.drop(columns=[sample_name])
@@ -101,11 +102,13 @@ def run_filtering(patient_comorbid_threshold,
     
     # filter based on mean expression
     meansdf_include = meansdf[meansdf["mean_value"]>min_mean_expression]
+    print(meansdf_include)
     
     # save output file based on include_values_file argument input
     #include_values_file = "../testdata/include_values_long.csv"
     outdir = include_values_file
     meansdf_include[["valuename"]].to_csv(outdir, header=False, index=False)
+    print("EXPRESSION FILE SAVED")
     
     ####Some ideas going forward:
     # Need to add more error handling

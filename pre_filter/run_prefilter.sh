@@ -23,10 +23,14 @@ include_binary_attribute_file=${outdir}include_binary_attribute_long.csv
 
 mkdir -p $outdir
 
+echo "Starting filtering at: $(date '+%Y-%m-%d %H:%M:%S') ..."
+echo "Filtering the following files:"
 echo $values_file
 echo $binary_attribute_file
-echo $outdirname
-echo "filtering..."
+echo "Output files:"
+echo $include_values_file
+echo $include_binary_attribute_file
+echo "Filtering running..."
 
 python3 run_filter.py \
     -sn $sample_name \
@@ -39,3 +43,11 @@ python3 run_filter.py \
     --max_comorbids_percent 0.9 \
     --min_mean_expression 0.1 \
     --individual_expression_threshold 10
+
+
+# In standard output check if the script completed successfully
+if [ $? -eq 0 ]; then
+    echo "Filtering completed successfully at: $(date '+%Y-%m-%d %H:%M:%S')"
+else
+    echo "Filtering failed at: $(date '+%Y-%m-%d %H:%M:%S')"
+fi
