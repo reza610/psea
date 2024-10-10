@@ -44,6 +44,5 @@ if __name__ == "__main__":
 
     
 ## next ##
-# mnake the slurm script
 # have argeparse treat as either float OR and integer
 #
