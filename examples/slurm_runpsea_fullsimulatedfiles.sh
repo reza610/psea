@@ -17,8 +17,8 @@ source $path_to_venv/psea_venv/bin/activate
 path_to_psea=$HOME
 indir=$HOME/psea/testdata/
 sample_name=Patient
-values_file=${indir}simulated_gene_exp_20241010203135.csv
-bianary_attribute_file=${indir}simulated_binary_attribute_20241010203135.csv
+values_file=${indir}simulated_gene_exp_20241011155516.csv
+bianary_attribute_file=${indir}simulated_binary_attribute_20241011155516.csv
 outdirname=$HOME/outpsea/
 
 mkdir $outdirname
